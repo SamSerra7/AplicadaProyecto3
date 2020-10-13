@@ -6,7 +6,7 @@ import operator
 with open('MOCK_DATA.csv') as csvarchivo:
     #crea una lista con las entradas
     entrada = csv.reader(csvarchivo)
-      for reg in entrada:
+    for reg in entrada:
         # Se imprime todo el registro cada línea se muestra como una lista de campos
         # se extraen las columnas
         id, first_name, last_name, email, gender, ip_address = reg
