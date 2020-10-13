@@ -4,9 +4,8 @@ import operator
 
 #se lee el archivo deseado
 with open('MOCK_DATA.csv') as csvarchivo:
+    #crea una lista con las entradas
     entrada = csv.reader(csvarchivo)
-
-
     for reg in entrada:
         # Se imprime todo el registro cada línea se muestra como una lista de campos
         # se extraen las columnas
