@@ -1,5 +1,6 @@
 import pymssql
 import psycopg2
+import pyodbc
 
 # conecction to PosgreSQL Server
 _postgre_server = "163.178.107.7"
@@ -28,13 +29,25 @@ def mssql_connection():
     except:
         print('ERROR: MSSQL CONNECTION')
 
+def mssql_connection_odbc():
+    try:
+        conn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
+                              "Server=PORTATIL-NESTOR;"
+                              "Database=XYZ;"
+                              "Trusted_Connection=yes;")
+
+        return conn
+    except:
+        print('ERROR: MSSQL CONNECTION')
+
+
 
 # CALL STORE PROCEDURE FROM SQL SERVER
 def get_data_from_sql(sp):
     try:
         con = mssql_connection()
         cur = con.cursor()
-        cur.execute("EXECUTE" + sp)
+        cur.execute("EXECUTE " + sp)
         data_return = cur.fetchall()
         con.commit()
         return data_return
