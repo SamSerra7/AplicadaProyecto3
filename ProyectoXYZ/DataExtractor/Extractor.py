@@ -2,7 +2,7 @@ import sys
 import csv
 import time
 
-from Configuration.Configuration import mssql_connection, get_data_from_sql
+from Configuration.Configuration import get_data_from_sql, mssql_connection_odbc
 from Binnacle.SaveLogSQLite import save_log_SQLite
 
 # Students extractor
@@ -10,7 +10,8 @@ def extractor_SqlServer (schema,procedure,table):
 
     try:
         query = schema+'.'+procedure
-        con_sql = mssql_connection()
+        con_sql = mssql_connection_odbc()
+        print(query)
         data = get_data_from_sql(query)
 
         if len(data) <= 0:
