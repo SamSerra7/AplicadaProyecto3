@@ -3,7 +3,7 @@ import csv
 import operator
 
 #se lee el archivo deseado
-with open('MOCK_DATA.csv') as csvarchivo:
+with open('../MOCK_DATA.csv') as csvarchivo:
     #crea una lista con las entradas
     entrada = csv.reader(csvarchivo)
     for reg in entrada:

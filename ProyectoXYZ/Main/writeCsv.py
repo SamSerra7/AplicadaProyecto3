@@ -4,11 +4,11 @@ import operator
 
 
 #salida.writerow([ 'id', 'first_name', 'last_name', 'email', 'gender', 'ip_address'])
-with open('MOCK_DATA.csv') as csvarchivo:
+with open('../MOCK_DATA.csv') as csvarchivo:
 
     entrada = csv.reader(csvarchivo)
 
-    csvsalida = open('salida.csv', 'w', newline='')
+    csvsalida = open('../202010144542_salida.csv', 'w', newline='')
 
     for reg in entrada:
         salida = csv.writer(csvsalida)
