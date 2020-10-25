@@ -6,6 +6,7 @@ schemas=['customers','sales']
 tables=['cliente','direccion','telefono','email','tarjeta_credito','factura','producto','producto_factura']
 procedures = ['listar_clientes','listar_direccion','listar_email','listar_tarjeta','listar_telefono','listar_factura','listar_producto','listar_producto_factura']
 
+
 def menu():
 
     fecha_inicio = input("Fecha inicio -> 'aaaa-mm-dd': ")

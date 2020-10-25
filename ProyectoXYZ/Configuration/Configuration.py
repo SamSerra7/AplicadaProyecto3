@@ -16,6 +16,7 @@ _sql_server_port = 1433
 _sql_user = "laboratorios"
 _sql_password = "KmZpo.2796"
 
+procedure_eliminar = 'EXECUTE customers.eliminar_Tablas'
 
 # SQL SERVER CONNECTION FUNCTION
 def mssql_connection():
@@ -45,9 +46,9 @@ def mssql_connection_odbc():
 # CALL STORE PROCEDURE FROM SQL SERVER
 def get_data_from_sql(sp):
     try:
-        con = mssql_connection()
+        con = mssql_connection_odbc()
         cur = con.cursor()
-        cur.execute("EXECUTE " + sp)
+        cur.execute("EXECUTE " + sp + ";" + procedure_eliminar)
         data_return = cur.fetchall()
         con.commit()
         return data_return
