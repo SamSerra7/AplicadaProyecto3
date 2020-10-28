@@ -16,7 +16,7 @@ _sql_server_port = 1433
 _sql_user = "laboratorios"
 _sql_password = "KmZpo.2796"
 
-procedure_eliminar = 'EXECUTE customers.eliminar_Tablas'
+procedure_delete = 'EXECUTE customers.eliminar_Tablas'
 
 # SQL SERVER CONNECTION FUNCTION
 def mssql_connection():
@@ -44,11 +44,11 @@ def mssql_connection_odbc():
 
 
 # CALL STORE PROCEDURE FROM SQL SERVER
-def get_data_from_sql(sp):
+def procedure_from_sql(sp):
     try:
         con = mssql_connection_odbc()
         cur = con.cursor()
-        cur.execute("EXECUTE " + sp + ";" + procedure_eliminar)
+        cur.execute("EXECUTE " + sp)
         data_return = cur.fetchall()
         con.commit()
         return data_return
@@ -56,7 +56,22 @@ def get_data_from_sql(sp):
         print("Error:(0) Getting data from MSSQL:(1)".format(
             e.errno, e.strerror
         ))
+    finally:
+        con.close()
 
+# CALL STORE PROCEDURE FROM SQL SERVER
+def procedure_from_sql_delete():
+    try:
+        con = mssql_connection_odbc()
+        cur = con.cursor()
+        cur.execute(procedure_delete)
+        con.commit()
+    except IOError as e:
+        print("Error:(0) Getting data from MSSQL:(1)".format(
+            e.errno, e.strerror
+        ))
+    finally:
+        con.close()
 
 # POSTGRESQL CONNECTION FUNCTION
 def postgresql_connection():

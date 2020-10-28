@@ -2,17 +2,18 @@ import sys
 import csv
 import time
 
-from Configuration.Configuration import get_data_from_sql, mssql_connection_odbc
+from Configuration.Configuration import procedure_from_sql_delete,procedure_from_sql, mssql_connection_odbc
 from Binnacle.SaveLogSQLite import save_log_SQLite
+
+
 
 #Extractor
 def extractor_SqlServer (schema,procedure,table):
 
     try:
-
         query = schema+'.'+procedure
-        con_sql = mssql_connection_odbc()
-        data = get_data_from_sql(query)
+        data = procedure_from_sql(query)
+        print(query)
 
         if len(data) <= 0:
             print('No data')
@@ -26,12 +27,11 @@ def extractor_SqlServer (schema,procedure,table):
                 salida.writerow(row)
                 del salida
 
-        print(save_log_SQLite('extraer', 'Se extrajeron los datos desde Sqlserver: tabla -> '+table))
+        procedure_from_sql_delete()
+        print(save_log_SQLite('extraer', 'Se extrajeron los datos desde Sqlserver: tabla -> '+table ))
         return csvsalida.name
     except IOError as e:
         print('Error (0) in the students_extractor function').format(e.errno, e.strerror)
-    finally:
-        con_sql.close()
 
 
-#print(students_extractor('','listar_clientes','clientes'))
+
