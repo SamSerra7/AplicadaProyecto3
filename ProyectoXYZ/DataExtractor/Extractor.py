@@ -2,15 +2,16 @@ import sys
 import csv
 import time
 
-from Configuration.Configuration import mssql_connection, get_data_from_sql
+from Configuration.Configuration import get_data_from_sql, mssql_connection_odbc
 from Binnacle.SaveLogSQLite import save_log_SQLite
 
-# Students extractor
+#Extractor
 def extractor_SqlServer (schema,procedure,table):
 
     try:
+
         query = schema+'.'+procedure
-        con_sql = mssql_connection()
+        con_sql = mssql_connection_odbc()
         data = get_data_from_sql(query)
 
         if len(data) <= 0:
@@ -22,9 +23,9 @@ def extractor_SqlServer (schema,procedure,table):
 
             for row in data:
                 salida = csv.writer(csvsalida)
-                #print(row)
                 salida.writerow(row)
                 del salida
+
         print(save_log_SQLite('extraer', 'Se extrajeron los datos desde Sqlserver: tabla -> '+table))
         return csvsalida.name
     except IOError as e:
