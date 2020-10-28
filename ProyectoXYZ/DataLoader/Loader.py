@@ -7,6 +7,7 @@ def loader_csv_file_postgre(origin,schema,table):
         con_postgre = postgresql_connection()
         cur = con_postgre.cursor()
         with open(origin, 'r') as f:
+            print(schema+'t->'+table)
             cur.copy_from(f,schema+'.'+table,sep=',')
             con_postgre.commit()
         save_log_SQLite('migrar','Se migraron los datos a PostgreSQL: tabla -> '+table)
